@@ -1,17 +1,11 @@
-- render :layout => 'layouts/users' do
+%h2 Forgotten password
 
-  %h2
-    Forgotten password
-    
-  %p
-    Fill out the form below and instructions to reset your password will be emailed to you.
-    
-  - form_tag password_resets_path do
+%p
+  Fill out the form below and instructions to reset your password will be emailed to you.
 
-    %p
-      %label
-        Email
-      = text_field_tag "email"
+- semantic_form_for User.new, :url => password_resets_path do |f|
+  - f.inputs do
+    = f.input :email
 
-    %p
-      = submit_tag "Reset my password"
+  - f.buttons do
+    = f.commit_button "Reset my password"

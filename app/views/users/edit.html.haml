@@ -1,35 +1,15 @@
-- render :layout => 'layouts/users' do
+%h2 Edit profile
 
-  %h2
-    Edit profile
-  
-  - form_for(@user) do |f|
-    = f.error_messages(:header_message => nil, :message => 'Please correct the following errors and try again:')
-  
-    %p
-      = f.label :username
-      = f.text_field :username
-    
-    %p
-      = f.label :email
-      = f.text_field :email
-    
-    %p
-      = f.label :password, 'New password'
-      = f.password_field :password
-      %br
-        %small
-          Leave blank to keep your existing password
-    
-    %p
-      = f.label :password_confirmation
-      = f.password_field :password_confirmation
+- semantic_form_for(@user) do |f|
+  = f.error_messages
+  - f.inputs do
+    = f.input :username
+    = f.input :email
+    = f.input :password, :hint => 'Leave blank to keep your existing password'
+    = f.input :password_confirmation
+    = f.input :time_zone 
 
-    %p
-      = f.label :time_zone
-      = f.time_zone_select('time_zone', ActiveSupport::TimeZone.us_zones.reverse)
-
-    %p
-      = f.submit 'Update'
-      or 
-      = link_to 'cancel', profile_path
+  - f.buttons do
+    = f.commit_button
+    or
+    = link_to 'cancel', profile_path
