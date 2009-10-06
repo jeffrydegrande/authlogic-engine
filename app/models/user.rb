@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-  
+  has_permalink :username
+
   acts_as_authentic
   
   validates_presence_of :email
@@ -8,5 +9,4 @@ class User < ActiveRecord::Base
     reset_perishable_token!  
     UserNotifier.deliver_password_reset_instructions(self)  
   end
-  
 end
