@@ -16,8 +16,10 @@ class UserSessionsController < ApplicationController
   
   def destroy
     @user_session = UserSession.find
-    @user_session.destroy
-    flash[:success] = "Successfully logged out"
+    unless @user_session.nil?
+      @user_session.destroy
+      flash[:success] = "Successfully logged out"
+    end
     redirect_to AuthlogicEngine.logout_destination
   end
 
